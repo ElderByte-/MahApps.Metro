@@ -85,6 +85,8 @@
     <Compile Include="Actions\SetFlyoutOpenAction.cs" />
     <Compile Include="Behaviours\BindableResourceBehavior.cs" />
     <Compile Include="Behaviours\BorderlessWindowBehavior.cs" />
+    <Compile Include="Controls\Dialogs\DialogCoordinator.cs" />
+    <Compile Include="Controls\Dialogs\DialogParticipation.cs" />
     <Compile Include="Behaviours\GlowWindowBehavior.cs" />
     <Compile Include="Behaviours\PasswordBoxBindingBehavior.cs" />
     <Compile Include="Behaviours\StylizedBehaviorCollection.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Controls\Dialogs\BaseMetroDialog.cs" />
     <Compile Include="Controls\Dialogs\DialogManager.cs" />
     <Compile Include="Controls\Dialogs\DialogStateChangedEventArgs.cs" />
+    <Compile Include="Controls\Dialogs\IDialogCoordinator.cs" />
     <Compile Include="Controls\Dialogs\InputDialog.cs" />
     <Compile Include="Controls\Dialogs\LoginDialog.cs" />
     <Compile Include="Controls\Dialogs\ProgressDialog.cs" />
@@ -115,6 +118,7 @@
     <Compile Include="Controls\Helper\ComboBoxHelper.cs" />
     <Compile Include="Controls\Helper\ControlsHelper.cs" />
     <Compile Include="Controls\Helper\DataGridCellHelper.cs" />
+    <Compile Include="Controls\Helper\ExpanderHelper.cs" />
     <Compile Include="Controls\Helper\GroupBoxHelper.cs" />
     <Compile Include="Controls\Helper\PasswordBoxHelper.cs" />
     <Compile Include="Controls\Helper\ScrollBarHelper.cs" />
@@ -147,6 +151,7 @@
     </Compile>
     <Compile Include="Controls\WindowCommandsOverlayBehavior.cs" />
     <Compile Include="Converters\BackgroundToForegroundConverter.cs" />
+    <Compile Include="Converters\ThicknessBindingConverter.cs" />
     <Compile Include="Converters\IsNullConverter.cs" />
     <Compile Include="Converters\FontSizeOffsetConverter.cs" />
     <Compile Include="Converters\MetroTabItemCloseButtonWidthConverter.cs" />
@@ -679,12 +684,6 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="MahApps.Metro.NET45.csproj">
-      <Project>{942D11C4-29F5-46C4-8C14-4B976D56C637}</Project>
-      <Name>MahApps.Metro.NET45</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

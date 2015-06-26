@@ -604,14 +604,18 @@ namespace MahApps.Metro.Controls
         {
             if (overlayBox == null) throw new InvalidOperationException("OverlayBox can not be founded in this MetroWindow's template. Are you calling this before the window has loaded?");
 
+            var tcs = new System.Threading.Tasks.TaskCompletionSource<object>();
+
             if (IsOverlayVisible() && overlayStoryboard == null)
-                return new System.Threading.Tasks.Task(() => { }); //No Task.FromResult in .NET 4.
+            {
+                //No Task.FromResult in .NET 4.
+                tcs.SetResult(null);
+                return tcs.Task;
+            }
 
             Dispatcher.VerifyAccess();
 
             overlayBox.Visibility = Visibility.Visible;
-
-            var tcs = new System.Threading.Tasks.TaskCompletionSource<object>();
 
             var sb = (Storyboard) this.Template.Resources["OverlayFastSemiFadeIn"];
 
@@ -646,12 +650,16 @@ namespace MahApps.Metro.Controls
         {
             if (overlayBox == null) throw new InvalidOperationException("OverlayBox can not be founded in this MetroWindow's template. Are you calling this before the window has loaded?");
 
+            var tcs = new System.Threading.Tasks.TaskCompletionSource<object>();
+
             if (overlayBox.Visibility == Visibility.Visible && overlayBox.Opacity == 0.0)
-                return new System.Threading.Tasks.Task(() => { }); //No Task.FromResult in .NET 4.
+            {
+                //No Task.FromResult in .NET 4.
+                tcs.SetResult(null);
+                return tcs.Task;
+            }
 
             Dispatcher.VerifyAccess();
-
-            var tcs = new System.Threading.Tasks.TaskCompletionSource<object>();
 
             var sb = (Storyboard) this.Template.Resources["OverlayFastSemiFadeOut"];
 
@@ -838,9 +846,17 @@ namespace MahApps.Metro.Controls
             if (RightWindowCommands == null)
                 RightWindowCommands = new WindowCommands();
 
+            LeftWindowCommands.ParentWindow = this;
+            RightWindowCommands.ParentWindow = this;
+
             LeftWindowCommandsPresenter = GetTemplateChild(PART_LeftWindowCommands) as ContentPresenter;
             RightWindowCommandsPresenter = GetTemplateChild(PART_RightWindowCommands) as ContentPresenter;
             WindowButtonCommands = GetTemplateChild(PART_WindowButtonCommands) as WindowButtonCommands;
+
+            if (WindowButtonCommands != null)
+            {
+                WindowButtonCommands.ParentWindow = this;
+            }
 
             overlayBox = GetTemplateChild(PART_OverlayBox) as Grid;
             metroDialogContainer = GetTemplateChild(PART_MetroDialogContainer) as Grid;
@@ -977,9 +993,23 @@ namespace MahApps.Metro.Controls
             }
         }
 
+        /// <summary>
+        /// Gets the template child with the given name.
+        /// </summary>
+        /// <typeparam name="T">The interface type inheirted from DependencyObject.</typeparam>
+        /// <param name="name">The name of the template child.</param>
         internal T GetPart<T>(string name) where T : DependencyObject
         {
             return GetTemplateChild(name) as T;
+        }
+
+        /// <summary>
+        /// Gets the template child with the given name.
+        /// </summary>
+        /// <param name="name">The name of the template child.</param>
+        internal DependencyObject GetPart(string name)
+        {
+            return GetTemplateChild(name);
         }
 
         private static void ShowSystemMenuPhysicalCoordinates(Window window, Point physicalScreenLocation)

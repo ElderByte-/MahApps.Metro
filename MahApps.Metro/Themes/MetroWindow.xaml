@@ -36,6 +36,7 @@
 
                     <Rectangle x:Name="PART_WindowTitleBackground"
                                Focusable="False"
+                               UseLayoutRounding="True"
                                Fill="{TemplateBinding WindowTitleBrush}"
                                Height="{Binding TitlebarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                                Visibility="{TemplateBinding ShowTitleBar, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -112,6 +113,7 @@
                                                    Grid.Column="4"
                                                    Grid.RowSpan="2"
                                                    VerticalAlignment="Top"
+                                                   UseLayoutRounding="True"
                                                    Height="{Binding TitlebarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
 
                     <!-- the main window content -->
@@ -119,6 +121,7 @@
                                                   Grid.Column="0"
                                                   Grid.ColumnSpan="5"
                                                   IsTabStop="False"
+                                                  UseLayoutRounding="True"
                                                   FocusVisualStyle="{x:Null}"
                                                   OnlyLoadTransition="True"
                                                   TransitionsEnabled="{TemplateBinding WindowTransitionsEnabled}">
@@ -170,13 +173,16 @@
             </AdornerDecorator>
 
             <Border x:Name="PART_Border"
+                    Background="{x:Null}"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
+                    UseLayoutRounding="True"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch" />
             <ResizeGrip x:Name="WindowResizeGrip"
                         HorizontalAlignment="Right"
                         IsTabStop="false"
+                        UseLayoutRounding="True"
                         Visibility="Collapsed"
                         VerticalAlignment="Bottom" />
         </Grid>
@@ -256,8 +262,6 @@
                 Value="1" />
         <Setter Property="BorderBrush"
                 Value="Transparent" />
-        <Setter Property="UseLayoutRounding"
-                Value="True" />
         <Setter Property="WindowTitleBrush"
                 Value="{DynamicResource WindowTitleColorBrush}" />
         <Setter Property="TextElement.FontSize"
@@ -335,7 +339,7 @@
                 Value="{DynamicResource BlackBrush}" />
         <Setter Property="IsTabStop"
                 Value="False" />
-        <Setter Property="VerticalAlignment"
+        <Setter Property="VerticalContentAlignment"
                 Value="Center" />
         <Setter Property="FocusVisualStyle"
                 Value="{x:Null}" />
